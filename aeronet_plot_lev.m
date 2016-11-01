@@ -1,5 +1,5 @@
 
-figure(1); 
+hfig = figure(1); 
 
 % exclude lines where any angstrom is negative
 mask=~any(aero.angstrom'<0)';
@@ -8,12 +8,14 @@ mask=mask&(aero.water(:,1)<6);
 
 % ---- angstrom
 clf;
-aeronet_plot_ONEILL_points(aero.jd(mask), aero.angstrom(mask,3), 'Angstrom 440-675nm')
-out=[aero.file '_angstrom_points.png'];
-print(out,'-dpng'); eval(['!mogrify -trim ' out]);
+aeronet_plot_ONEILL_points(aero.jd(mask), aero.angstrom(mask,3), 'AE_{\alpha})(440-675nm)', 'Extinction-related Angstrom exponent (AE_{\alpha}) between 440 and 675 nm')
+out=[aero.file '_angstrom_points'];
+savefig(hfig, [out '.fig']);
+print([out '.png'],'-dpng'); 
+% eval(['!mogrify -trim ' [out '.png']]); %trim image edges using ImageMagick
 
 clf;
-aeronet_plot_ONEILL_box(aero.jd(mask), aero.angstrom(mask,3), 'Angstrom 440-675nm',...
+aeronet_plot_ONEILL_box(aero.jd(mask), aero.angstrom(mask,3), 'AE_{\alpha})(440-675nm)',...
                         [7:11], [1:6,12] )
 out=[aero.file '_angstrom_box.png'];
 print(out,'-dpng'); eval(['!mogrify -trim ' out]);
