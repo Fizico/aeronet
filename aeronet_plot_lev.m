@@ -11,14 +11,26 @@ clf;
 aeronet_plot_ONEILL_points(aero.jd(mask), aero.angstrom(mask,3), 'AE_{\alpha})(440-675nm)', 'Extinction-related Angstrom exponent (AE_{\alpha}) between 440 and 675 nm')
 out=[aero.file '_angstrom_points'];
 savefig(hfig, [out '.fig']);
-print([out '.png'],'-dpng'); 
+dpi = get(0,'ScreenPixelsPerInch');
+currpos = get(hfig,'Position');
+H=currpos(4); W=currpos(3);
+set(hfig, 'paperunits', 'inches');
+set(hfig, 'paperposition', [0 0 W/dpi H/dpi]);
+set(hfig, 'papersize', [W/dpi H/dpi]);  
+print(hfig, sprintf('-r%d',dpi), '-dpng', [out '.png']); 
 % eval(['!mogrify -trim ' [out '.png']]); %trim image edges using ImageMagick
 
 clf;
 aeronet_plot_ONEILL_box(aero.jd(mask), aero.angstrom(mask,3), 'AE_{\alpha})(440-675nm)', 7:11, [1:6,12], 0, sprintf('AE_{\\alpha}(440-675nm) Wishker box: %s-%s', datestr(aero.jd(1),'mmm/yy'), datestr(aero.jd(end),'mmm/yy')));
 out=[aero.file '_angstrom_box'];
 savefig(hfig, [out '.fig']);
-print([out '.png'],'-dpng'); 
+dpi = get(0,'ScreenPixelsPerInch');
+currpos = get(hfig,'Position');
+H=currpos(4); W=currpos(3);
+set(hfig, 'paperunits', 'inches');
+set(hfig, 'paperposition', [0 0 W/dpi H/dpi]);
+set(hfig, 'papersize', [W/dpi H/dpi]);  
+print(hfig, sprintf('-r%d',dpi), '-dpng', [out '.png']); 
 % eval(['!mogrify -trim ' [out '.png']]); %trim image edges using ImageMagick
 
 % ---- water
