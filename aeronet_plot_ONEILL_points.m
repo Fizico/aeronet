@@ -11,7 +11,7 @@ title(tit);
 %minval=0;
 yval=get(gca,'ylim'); minval=yval(1); maxval=yval(2);
 ylim([minval maxval]); 
-ylabel(ylab,'fontsize',12);
+ylabel(ylab);
 % round scale to full years 
 tmp1=datevec(min(jd)); 
 tmp2=datevec(max(jd)); 
@@ -27,7 +27,8 @@ else
     labelstring = 'Month/Day';
 end
 xlim([jd1, jd2]);
-xlabel(labelstring,'fontsize',12);
+xlabel(labelstring);
+set(sub,'FontSize',16);
 datetick('x',tickformat,'keeplimits');
 grid on; 
 % histograms on right side
@@ -37,7 +38,7 @@ hall=histc(val(:,1),bins);
 b=barh(bins+(bins(2)-bins(1))/2,hall/sum(hall),1,'w'); 
 set(b,'facecolor',[0.7 0.7 0.7]);
 ylim([minval maxval]); 
-xlabel('Frequency','fontsize',12);
+xlabel('Frequency');
 tmp=get(gca,'xtick');
 xtic=linspace(0, max(hall/sum(hall))*1.2, 4);
 xlim([min(xtic) max(xtic)]);
@@ -49,5 +50,6 @@ xlim([min(xtic) max(xtic)]);
 % set(gca,'XTick',xtic);
 % set(gca,'xticklabel',xticl);
 set(gca,'yticklabel','');
+set(sub,'FontSize',16);
 grid on;
 %
